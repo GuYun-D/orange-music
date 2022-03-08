@@ -1,8 +1,9 @@
+import config from './config'
 // 封装ajax
 export default function (url, data, method = "GET", cb) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url,
+      url: config.host + url,
       data,
       method,
       success: (result) => {

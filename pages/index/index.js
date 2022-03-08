@@ -12,7 +12,7 @@ Page({
   async getInitData() {
     const {
       banners
-    } = await request('http://localhost:3000/banner', {
+    } = await request('banner', {
       type: 2
     })
     this.setData({
