@@ -2,7 +2,8 @@
   "pages":[
     "pages/personal/personal",
     "pages/index/index",
-    "pages/video/video"
+    "pages/video/video",
+    "pages/loign/login"
   ],
   "window":{
     "backgroundTextStyle":"light",

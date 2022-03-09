@@ -1,3 +1,4 @@
+import request from '../../utils/request'
 let startY = 0 // 手指起始坐标
 let moveY = 0 // 手指移动实时坐标
 let moveDistance = 0 // 手指移动的距离
@@ -5,7 +6,9 @@ let moveDistance = 0 // 手指移动的距离
 Page({
   data: {
     transformYNum: "translate(0)",
-    transitionNum: ""
+    transitionNum: "",
+    userInfo: {},
+    recentPlay: []
   },
 
   handleTouchStart(event) {
@@ -17,20 +20,25 @@ Page({
 
   handleTouchMove(event) {
     moveY = event.touches[0].clientY
-
     // 计算手指移动的距离
     moveDistance = moveY - startY
-    
-    if(moveDistance < 0){
+    if (moveDistance < 0) {
       return
     }
-
-    if(moveDistance >= 80){
+    if (moveDistance >= 80) {
       moveDistance = 80
     }
-
     this.setData({
       transformYNum: `translateY(${moveDistance}rpx)`
+    })
+  },
+
+  toLogin() {
+    if (this.data.userInfo.nickname) {
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/loign/login',
     })
   },
 
@@ -41,8 +49,35 @@ Page({
     })
   },
   onLoad: function (options) {
+    // 获取本地用户信息
+    let userInfo = wx.getStorageSync('userInfo')
 
+    if (userInfo) {
+      this.setData({
+        userInfo: userInfo
+      })
+
+      // 获取用户的播放记录
+      this.getUserRencet(this.data.userInfo.userId)
+    }
   },
+
+  // 获取用户播放记录
+  async getUserRencet(userId) {
+    let recordResult = await request('user/record', {
+      uid: userId,
+      type: 0
+    })
+
+    let recentPlayList = recordResult.allData.slice(0, 10).map((item, index) => {
+      item.id = index++
+      return item
+    })
+    this.setData({
+      recentPlay: recentPlayList
+    })
+  },
+
   onReady: function () {
 
   },
