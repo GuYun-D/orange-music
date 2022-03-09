@@ -3,7 +3,9 @@ import request from '../../utils/request'
 const app = getApp()
 Page({
   data: {
-    banners: []
+    banners: [], /// 轮播图
+    recommendList: [], // 推荐
+    topList: [], // 排行榜 
   },
   onLoad() {
     this.getInitData()
@@ -18,5 +20,30 @@ Page({
     this.setData({
       banners: banners
     })
+    const {
+      result
+    } = await request('personalized')
+    this.setData({
+      recommendList: result
+    })
+
+    // 获取排行榜的数据
+    let idx = 0
+    let resultTopArr = []
+    while (idx < 5) {
+      const
+        res = await request('top/list', {
+          idx: idx++
+        })
+
+      resultTopArr.push({
+        name: res.playlist.name,
+        tracks: res.playlist.tracks
+      })
+
+      this.setData({
+        topList: resultTopArr
+      })
+    }
   }
 })
