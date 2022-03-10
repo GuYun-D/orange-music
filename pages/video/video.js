@@ -47,4 +47,17 @@ Page({
 
     wx.hideLoading()
   },
+
+  // 监听视频播放的回调
+  handleMusicPlay(event) {
+    /**
+     *  只允许一个视频播放
+     * 关闭的方法：wx.createVideoContext('id',component)
+     */
+     // 获取视频的id
+     let vid = event.currentTarget.id
+     this.videoContext && this.vid !== vid  && this.videoContext.stop()
+     this.vid = vid
+     this.videoContext = wx.createVideoContext(vid)
+  }
 })

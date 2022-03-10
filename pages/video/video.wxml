@@ -18,7 +18,7 @@
   <!-- 视频列表区域start -->
   <scroll-view class="video-scrll">
     <view class="video-item" wx:for="{{videoLiSt}}" wx:key="id">
-      <video object-fit="cover" src="{{item.data.urlInfo.url}}"></video>
+      <video bindplay="handleMusicPlay" id="{{item.data.vid}}" object-fit="cover" src="{{item.data.urlInfo.url}}"></video>
 
       <view class="content">{{item.data.title}}</view>
 
