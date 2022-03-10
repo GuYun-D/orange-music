@@ -14,4 +14,33 @@
     </view>
   </scroll-view>
   <!-- 导航区域end -->
+
+  <!-- 视频列表区域start -->
+  <scroll-view class="video-scrll">
+    <view class="video-item" wx:for="{{videoLiSt}}" wx:key="id">
+      <video object-fit="cover" src="{{item.data.urlInfo.url}}"></video>
+
+      <view class="content">{{item.data.title}}</view>
+
+      <view class="footer">
+        <image class="avatar" src="{{item.data.creator.avatarUrl}}"></image>
+        <text class="nickName">{{item.data.creator.nickname}}</text>
+        <view class="comments_praised">
+          <text class="item">
+            <text class="iconfont icon-buoumaotubiao15"></text>
+            <text class="count">{{item.data.praisedCount}}</text>
+          </text>
+          <text class="item">
+            <text class="iconfont icon-pinglun1"></text>
+            <text class="count">{{item.data.commentCount}}</text>
+          </text>
+          <button open-type="share" class="item btn">
+            <text class="iconfont icon-gengduo"></text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 视频列表区域end -->
+
 </view>
