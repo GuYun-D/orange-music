@@ -104,3 +104,10 @@
   top: -20rpx;
   font-size: 20rpx;
 }
+
+.no-data{
+  width: 100%;
+  padding: 10rpx;
+  color: #ccc;
+  text-align: center;
+}

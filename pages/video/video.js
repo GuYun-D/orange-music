@@ -1,4 +1,6 @@
 import request from '../../utils/request'
+let timer = null
+
 Page({
   data: {
     navList: [],
@@ -6,7 +8,8 @@ Page({
     videoLiSt: [],
     videoId: "",
     videoUpdataTimeInfo: [],
-    isTraggered: false // 标识下拉刷新是否被触发
+    isTraggered: false, // 标识下拉刷新是否被触发
+    isNoData: false
   },
   onLoad: function (options) {
     this.getNavList()
@@ -111,16 +114,30 @@ Page({
 
   // 视频播放完毕，将历史记录移除
   handleMusicEnd(event) {
-    const { videoUpdataTimeInfo } = this.data
- 
-    videoUpdataTimeInfo .splice(videoUpdataTimeInfo.findIndex(item => item.vid === event.currentTarget.id), 1)
+    const {
+      videoUpdataTimeInfo
+    } = this.data
+
+    videoUpdataTimeInfo.splice(videoUpdataTimeInfo.findIndex(item => item.vid === event.currentTarget.id), 1)
 
     this.setData({
       videoUpdataTimeInfo
     })
   },
   // 下拉刷新
-  handleRefresh(){
+  handleRefresh() {
     this.getVideoList(this.data.navId)
+  },
+  // 下拉触底
+  handleScrollLower() {
+    this.setData({
+      isNoData: true
+    })
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      this.setData({
+        isNoData: false
+      })
+    }, 500)
   }
 })
