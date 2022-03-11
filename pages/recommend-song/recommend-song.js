@@ -21,5 +21,12 @@ Page({
     this.setData({
       recommendList: recommendResult.recommend
     })
+  },
+
+  toSongDetail(event) {
+    let songId = event.currentTarget.dataset.song.id.toString()
+    wx.navigateTo({
+      url: '/pages/song-detail/song-detail?id=' + songId,
+    })
   }
 })

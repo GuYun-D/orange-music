@@ -1,16 +1,17 @@
 {
-  "pages":[
-    "pages/recommend-song/recommend-song",
+  "pages": [
     "pages/video/video",
+    "pages/recommend-song/recommend-song",
+    "pages/song-detail/song-detail",
     "pages/personal/personal",
     "pages/index/index",
     "pages/loign/login"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f40",
     "navigationBarTitleText": "橙子音乐",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
@@ -38,5 +39,5 @@
         "selectedIconPath": "/static/tab/tab-my-current.png"
       }
     ]
-  } 
+  }
 }

@@ -33,6 +33,11 @@
   background-color: #fff;
 }
 
+.list-container .list-header text:first-child{
+  font-size: 36rpx;
+  padding: 20rpx 0;
+}
+
 .list-container .list-header text:last-child{
   float: right;
 }
@@ -64,6 +69,11 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.recommend-item .music-info text:last-child{
+  font-size: 30rpx;
+  color: #91cdf6;
 }
 
 .recommend-item .iconfont {

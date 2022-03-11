@@ -1,0 +1,17 @@
+<view class="music-detail-container">
+  <view class="author">beyond</view>
+  <view class="circle"></view>
+  <image class="needle {{isPlay && 'needle-rotate'}}" src="/static/images/song/needle.png"></image>
+  <view class="disc-container {{isPlay &&'disc-rotate'}}">
+    <image class="disc" src="/static/images/song/disc.png"></image>
+    <image class="music-img" src="/static/images/recommendSong/08.jpg"></image>
+  </view>
+
+  <view class="music-control">
+    <text class="iconfont icon-iconsMusicyemianbofangmoshiShuffle"></text>
+    <text class="iconfont icon-shangyishou"></text>
+    <text class="iconfont {{isPlay ? 'icon-zanting' : 'icon-bofang'}} big" bindtap="handleMusicPlay"></text>
+    <text class="iconfont icon-next"></text>
+    <text class="iconfont icon-iconsMusicyemianbofangmoshiPlayList"></text>
+  </view>
+</view>

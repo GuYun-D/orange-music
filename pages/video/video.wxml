@@ -8,33 +8,17 @@
   <!-- 头部搜索end -->
 
   <!-- 导航区域start -->
-  <scroll-view class="nav-scroll" enable-flex scroll-x>
-    <view class="nav-item" wx:for="{{navList}}" wx:key="id">
+  <scroll-view scroll-with-animation scroll-into-view="{{'scroll' + navId}}" class="nav-scroll" enable-flex scroll-x>
+    <view id="{{'scroll' + item.id}}" class="nav-item" wx:for="{{navList}}" wx:key="id">
       <view class="nav-content {{navId == item.id ? 'active' : ''}}" bindtap="chnageNav" id="{{item.id}}">{{item.name}}</view>
     </view>
   </scroll-view>
   <!-- 导航区域end -->
 
   <!-- 视频列表区域start -->
-  <scroll-view
-    class="video-scrll"
-    scroll-y
-    refresher-enabled  
-    bindrefresherrefresh="handleRefresh"
-    refresher-triggered="{{isTraggered}}"
-    bindscrolltolower="handleScrollLower"
-  >
+  <scroll-view class="video-scrll" scroll-y refresher-enabled bindrefresherrefresh="handleRefresh" refresher-triggered="{{isTraggered}}" bindscrolltolower="handleScrollLower">
     <view class="video-item" wx:for="{{videoLiSt}}" wx:key="id">
-      <video 
-        wx:if="{{ videoId === item.data.vid}}"
-        bindtimeupdate="handleMusicTimeUpdata"
-        bindplay="handleMusicPlay" 
-        poster="{{item.data.coverUrl}}" 
-        id="{{item.data.vid}}" 
-        object-fit="cover" 
-        src="{{item.data.urlInfo.url}}"
-        bindended="handleMusicEnd"
-      ></video>
+      <video wx:if="{{ videoId === item.data.vid}}" bindtimeupdate="handleMusicTimeUpdata" bindplay="handleMusicPlay" poster="{{item.data.coverUrl}}" id="{{item.data.vid}}" object-fit="cover" src="{{item.data.urlInfo.url}}" bindended="handleMusicEnd"></video>
 
       <image wx:else id="{{item.data.vid}}" bindtap="handleMusicPlay" class="cover-img" src="{{item.data.coverUrl}}"></image>
 
