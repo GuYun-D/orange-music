@@ -4,7 +4,8 @@ Page({
     navList: [],
     navId: "",
     videoLiSt: [],
-    videoId: ""
+    videoId: "",
+    videoUpdataTimeInfo: []
   },
   onLoad: function (options) {
     this.getNavList()
@@ -29,6 +30,33 @@ Page({
     this.getVideoList(navId)
   },
 
+  // 视频播放进度的回调
+  handleMusicTimeUpdata(event) {
+    let {
+      currentTime,
+    } = event.detail
+    const videoTimeObj = {
+      vid: event.currentTarget.id,
+      currentTime,
+    }
+
+    // 添加播放记录
+    const {
+      videoUpdataTimeInfo
+    } = this.data
+
+    let videoItem = videoUpdataTimeInfo.find(item => item.vid === event.currentTarget.id)
+    if (videoItem) {
+      videoItem.currentTime = currentTime
+    } else {
+      videoUpdataTimeInfo.push(videoTimeObj)
+    }
+
+    this.setData({
+      videoUpdataTimeInfo
+    })
+  },
+
   // 获取视频信息
   async getVideoList(navId) {
     wx.showLoading({
@@ -42,7 +70,7 @@ Page({
     if (!videoListResult.datas) {
       return;
     }
-    
+
     let index = 0
     this.setData({
       videoLiSt: videoListResult.datas.map(item => {
@@ -68,6 +96,25 @@ Page({
       videoId: vid
     })
     this.videoContext = wx.createVideoContext(vid)
+    // 判断当前视频是否有播放记录
+    let {
+      videoUpdataTimeInfo
+    } = this.data
+    let videoItem = videoUpdataTimeInfo.find(item => item.vid === vid)
+    if (videoItem) {
+      this.videoContext.seek(videoItem.currentTime)
+    }
     this.videoContext.play()
+  },
+
+  // 视频播放完毕，将历史记录移除
+  handleMusicEnd(event) {
+    const { videoUpdataTimeInfo } = this.data
+ 
+    videoUpdataTimeInfo .splice(videoUpdataTimeInfo.findIndex(item => item.vid === event.currentTarget.id), 1)
+
+    this.setData({
+      videoUpdataTimeInfo
+    })
   }
 })

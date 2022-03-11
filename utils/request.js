@@ -7,7 +7,7 @@ export default function (url, data, method = "GET", cb) {
       data,
       method,
       header: {
-        cookie: wx.getStorageSync('cookies').find(item => item.indexOf('MUSIC_U') !== -1) || ''
+        cookie: (wx.getStorageSync('cookies') || []).find(item => item.indexOf('MUSIC_U') !== -1) || ''
       },
       success: (result) => {
         // 登陆成功，将cookie保存到本地
