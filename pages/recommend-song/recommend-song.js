@@ -1,13 +1,25 @@
-// pages/recommend-song/recommend-song.js
+import request from '../../utils/request'
+
 Page({
   data: {
     day: 0,
-    month: 0
+    month: 0,
+    recommendList: []
   },
   onLoad: function (options) {
     this.setData({
       day: new Date().getDate(),
       month: new Date().getMonth() + 1
     })
+
+    this.getRecommendList()
   },
+
+  async getRecommendList() {
+    const recommendResult = await request('recommend/songs')
+
+    this.setData({
+      recommendList: recommendResult.recommend
+    })
+  }
 })
