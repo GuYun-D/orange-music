@@ -16,7 +16,13 @@
   <!-- 导航区域end -->
 
   <!-- 视频列表区域start -->
-  <scroll-view class="video-scrll">
+  <scroll-view
+    class="video-scrll"
+    scroll-y
+    refresher-enabled  
+    bindrefresherrefresh="handleRefresh"
+    refresher-triggered="{{isTraggered}}"
+  >
     <view class="video-item" wx:for="{{videoLiSt}}" wx:key="id">
       <video 
         wx:if="{{ videoId === item.data.vid}}"

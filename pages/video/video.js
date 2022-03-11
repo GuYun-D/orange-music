@@ -5,7 +5,8 @@ Page({
     navId: "",
     videoLiSt: [],
     videoId: "",
-    videoUpdataTimeInfo: []
+    videoUpdataTimeInfo: [],
+    isTraggered: false // 标识下拉刷新是否被触发
   },
   onLoad: function (options) {
     this.getNavList()
@@ -76,7 +77,8 @@ Page({
       videoLiSt: videoListResult.datas.map(item => {
         item.id = index++
         return item
-      })
+      }),
+      isTraggered: false
     })
 
     wx.hideLoading()
@@ -116,5 +118,9 @@ Page({
     this.setData({
       videoUpdataTimeInfo
     })
+  },
+  // 下拉刷新
+  handleRefresh(){
+    this.getVideoList(this.data.navId)
   }
 })

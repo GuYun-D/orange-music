@@ -37,6 +37,7 @@
 
 .video-scrll{
   margin-top: 20rpx;
+  height: calc(100vh - 163rpx);
 }
 
 .video-scrll .video-item{
