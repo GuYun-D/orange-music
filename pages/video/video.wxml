@@ -18,7 +18,9 @@
   <!-- 视频列表区域start -->
   <scroll-view class="video-scrll">
     <view class="video-item" wx:for="{{videoLiSt}}" wx:key="id">
-      <video bindplay="handleMusicPlay" id="{{item.data.vid}}" object-fit="cover" src="{{item.data.urlInfo.url}}"></video>
+      <video wx:if="{{ videoId === item.data.vid}}" bindplay="handleMusicPlay" poster="{{item.data.coverUrl}}" id="{{item.data.vid}}" object-fit="cover" src="{{item.data.urlInfo.url}}"></video>
+
+      <image wx:else id="{{item.data.vid}}" bindtap="handleMusicPlay" class="cover-img" src="{{item.data.coverUrl}}"></image>
 
       <view class="content">{{item.data.title}}</view>
 

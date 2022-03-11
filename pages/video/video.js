@@ -3,7 +3,8 @@ Page({
   data: {
     navList: [],
     navId: "",
-    videoLiSt: []
+    videoLiSt: [],
+    videoId: ""
   },
   onLoad: function (options) {
     this.getNavList()
@@ -37,6 +38,11 @@ Page({
     const videoListResult = await request('video/group', {
       id: navId
     })
+
+    if (!videoListResult.datas) {
+      return;
+    }
+    
     let index = 0
     this.setData({
       videoLiSt: videoListResult.datas.map(item => {
@@ -54,10 +60,14 @@ Page({
      *  只允许一个视频播放
      * 关闭的方法：wx.createVideoContext('id',component)
      */
-     // 获取视频的id
-     let vid = event.currentTarget.id
-     this.videoContext && this.vid !== vid  && this.videoContext.stop()
-     this.vid = vid
-     this.videoContext = wx.createVideoContext(vid)
+    // 获取视频的id
+    let vid = event.currentTarget.id
+    //  this.videoContext && this.vid !== vid  && this.videoContext.stop()
+    this.vid = vid
+    this.setData({
+      videoId: vid
+    })
+    this.videoContext = wx.createVideoContext(vid)
+    this.videoContext.play()
   }
 })

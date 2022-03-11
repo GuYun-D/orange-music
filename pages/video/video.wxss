@@ -43,7 +43,8 @@
   padding: 0 3%;
 }
 
-.video-scrll .video-item video{
+.video-scrll .video-item video,
+.video-scrll .video-item .cover-img{
   width: 100%;
   height: 360rpx;
   border-radius: 10rpx;
