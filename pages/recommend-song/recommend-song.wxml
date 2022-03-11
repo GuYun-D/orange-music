@@ -1,0 +1,49 @@
+<view class="recommend-container">
+  <!-- header start -->
+  <view class="header">
+    <image src="/static/images/recommendSong/recommendSong.jpg"></image>
+
+    <view class="date">
+      <text class="day">{{day}} / </text>
+      <text class="month">{{month}}</text>
+    </view>
+  </view>
+  <!-- header end -->
+
+  <!-- 推荐内容区 start -->
+  <view class="list-container">
+    <view class="list-header">
+      <text>播放全部</text>
+      <text>多选</text>
+    </view>
+
+    <!-- 内容区 -->
+    <scroll-view>
+      <view class="recommend-item">
+        <image src="/static/images/recommendSong/02.jpg"></image>
+        <view class="music-info">
+          <text>光辉岁月</text>
+          <text>beyond</text>
+        </view>
+        <text class="iconfont icon-gengduo"></text>
+      </view>
+      <view class="recommend-item">
+        <image src="/static/images/recommendSong/02.jpg"></image>
+        <view class="music-info">
+          <text>光辉岁月</text>
+          <text>beyond</text>
+        </view>
+        <text class="iconfont icon-gengduo"></text>
+      </view>
+      <view class="recommend-item">
+        <image src="/static/images/recommendSong/02.jpg"></image>
+        <view class="music-info">
+          <text>光辉岁月</text>
+          <text>beyond</text>
+        </view>
+        <text class="iconfont icon-gengduo"></text>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 推荐内容区 end -->
+</view>
