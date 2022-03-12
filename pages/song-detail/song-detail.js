@@ -1,4 +1,6 @@
 import request from '../../utils/request'
+// 获取全局app实例
+const app = getApp()
 
 Page({
   data: {
@@ -22,6 +24,16 @@ Page({
       currrentMusicId: id
     })
     this.getSongInfo(id)
+
+    // 判断当前音乐是否在播放
+    if (app.globalData.musicId === id && app.globalData.isMusicPlay) {
+      // 在播放
+      this.setData({
+        isPlay: true
+      })
+    } else {
+
+    }
   },
   async getSongInfo(id) {
     const musicInfo = await request('song/detail', {
@@ -58,8 +70,14 @@ Page({
       //  生成北京音频的实例
       backgroundAudioManager.src = musicPlayLink
       backgroundAudioManager.title = this.data.musicInfo.name
+
+      // 修改全局的播放状态
+      app.globalData.isMusicPlay = true
+      app.globalData.musicId = musicId
     } else {
       backgroundAudioManager.pause()
+      app.globalData.isMusicPlay = false
+      app.globalData.musicId = musicId
     }
   }
 })

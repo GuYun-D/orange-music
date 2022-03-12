@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    isMusicPay: false, // 音乐播放状态
+    musicId: "" // 音乐id
   }
 })
