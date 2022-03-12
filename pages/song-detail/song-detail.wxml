@@ -1,10 +1,10 @@
 <view class="music-detail-container">
-  <view class="author">beyond</view>
+  <view class="author">{{musicInfo.al.name}}</view>
   <view class="circle"></view>
   <image class="needle {{isPlay && 'needle-rotate'}}" src="/static/images/song/needle.png"></image>
   <view class="disc-container {{isPlay &&'disc-rotate'}}">
     <image class="disc" src="/static/images/song/disc.png"></image>
-    <image class="music-img" src="/static/images/recommendSong/08.jpg"></image>
+    <image class="music-img" src="{{musicInfo.al.picUrl}}"></image>
   </view>
 
   <view class="music-control">

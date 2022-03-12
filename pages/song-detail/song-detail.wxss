@@ -10,6 +10,7 @@ page {
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
+  overflow: hidden;
 }
 
 .circle {
@@ -90,4 +91,8 @@ page {
 .music-control .iconfont{
   font-size: 50rpx;
   color: #fff;
+}
+
+.music-control .iconfont.big{
+  font-size: 90rpx;
 }
