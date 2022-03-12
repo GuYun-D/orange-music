@@ -21,6 +21,11 @@ page {
   z-index: 10;
 }
 
+.author{
+  padding: 20rpx 0;
+  color: #fff;
+}
+
 .needle {
   position: relative;
   top: -40rpx;
@@ -56,11 +61,11 @@ page {
 }
 
 @keyframes disc {
-  from{
+  from {
     transform: rotate(0deg);
   }
 
-  to{
+  to {
     transform: rotate(360deg);
   }
 }
@@ -77,7 +82,7 @@ page {
   border-radius: 50%;
 }
 
-.music-control{
+.music-control {
   box-sizing: border-box;
   width: 100%;
   padding: 0 100rpx;
@@ -88,11 +93,48 @@ page {
   padding-top: 30rpx;
 }
 
-.music-control .iconfont{
+.music-control .iconfont {
   font-size: 50rpx;
   color: #fff;
 }
 
-.music-control .iconfont.big{
+.music-control .iconfont.big {
   font-size: 90rpx;
+}
+
+.progress-container {
+  position: absolute;
+  bottom: 275rpx;
+  display: flex;
+  width: 640rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.bar-container {
+  position: relative;
+  width: 450rpx;
+  height: 4rpx;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.audio-current-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: rgb(180, 28, 12);
+}
+
+.audio-current-bar::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: -4rpx;
+  right: -6rpx;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background-color: #fff;
 }

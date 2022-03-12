@@ -1,10 +1,18 @@
 <view class="music-detail-container">
-  <view class="author">{{musicInfo.al.name}}</view>
+  <view class="author">{{musicInfo.ar[0].name}}</view>
   <view class="circle"></view>
   <image class="needle {{isPlay && 'needle-rotate'}}" src="/static/images/song/needle.png"></image>
   <view class="disc-container {{isPlay &&'disc-rotate'}}">
     <image class="disc" src="/static/images/song/disc.png"></image>
     <image class="music-img" src="{{musicInfo.al.picUrl}}"></image>
+  </view>
+
+  <view class="progress-container">
+    <text>{{currentTime}}</text>
+    <view class="bar-container">
+      <view class="audio-current-bar" style="width: {{currentWidth}}"></view>
+    </view>
+    <text>{{durationTime}}</text>
   </view>
 
   <view class="music-control">

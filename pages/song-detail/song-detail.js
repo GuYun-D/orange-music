@@ -1,4 +1,5 @@
 import PubSub from "pubsub-js"
+import moment from 'moment'
 import request from '../../utils/request'
 // 获取全局app实例
 const app = getApp()
@@ -8,7 +9,10 @@ Page({
     isPlay: false,
     musicInfo: {},
     currrentMusicId: 0,
-    musicLink: ""
+    musicLink: "",
+    currentTime: "00:00",
+    durationTime: "00:00",
+    currentWidth: "0%"
   },
   onLoad: function (options) {
     // 接收路由参数 onLoad的自动的参数options：就携带着
@@ -61,6 +65,24 @@ Page({
       app.globalData.isMusicPlay = false
     })
 
+    this.backgroundAudioManager.onTimeUpdate(() => {
+      this.setData({
+        currentTime: moment(this.backgroundAudioManager.currentTime * 1000).format("mm:ss"),
+        currentWidth: ((this.backgroundAudioManager.currentTime) / (this.backgroundAudioManager.duration)) * 100 + "%"
+      })
+    })
+
+    this.backgroundAudioManager.onEnded(() => {
+      // 停止播放，切歌
+      PubSub.publish("switchType", "next")
+      // 还原状态
+      this.setData({
+        currentTime: "00:00",
+        durationTime: "00:00",
+        currentWidth: "0%"
+      })
+    })
+
     // 订阅
     PubSub.subscribe("musicId", (msg, musicId) => {
       this.getSongInfo(musicId)
@@ -72,15 +94,17 @@ Page({
       this.musicControl(true, musicId)
     })
   },
+
   async getSongInfo(id) {
     const musicInfo = await request('song/detail', {
       ids: id
     })
     this.setData({
-      musicInfo: musicInfo.songs[0]
+      musicInfo: musicInfo.songs[0],
+      durationTime: moment(musicInfo.songs[0].dt).format("mm:ss")
     })
     wx.setNavigationBarTitle({
-      title: musicInfo.songs[0].al.name,
+      title: musicInfo.songs[0].al.name
     })
   },
 
@@ -116,6 +140,7 @@ Page({
   // 切歌
   handleSwitchMusic(event) {
     const opId = event.currentTarget.id
+    this.backgroundAudioManager.stop()
     // 发布消息
     PubSub.publish("switchType", opId)
   }
