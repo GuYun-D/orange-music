@@ -31,9 +31,33 @@ Page({
       this.setData({
         isPlay: true
       })
-    } else {
-
+      app.globalData.isMusicPlay = true
     }
+
+    // 用户在使用时会通过系统生成的音乐任务栏进行操作，这个操作页面监听不到，所以直接监听音乐的播放，暂停，停止
+    this.backgroundAudioManager = wx.getBackgroundAudioManager()
+
+    this.backgroundAudioManager.onPlay(() => {
+      this.setData({
+        isPlay: true
+      })
+      app.globalData.isMusicPlay = true
+      app.globalData.musicId = id
+    })
+
+    this.backgroundAudioManager.onPause(() => {
+      this.setData({
+        isPlay: false
+      })
+      app.globalData.isMusicPlay = false
+    })
+
+    this.backgroundAudioManager.onStop(() => {
+      this.setData({
+        isPlay: false
+      })
+      app.globalData.isMusicPlay = false
+    })
   },
   async getSongInfo(id) {
     const musicInfo = await request('song/detail', {
@@ -51,16 +75,12 @@ Page({
     let {
       isPlay
     } = this.data
-    this.setData({
-      isPlay: !isPlay
-    })
 
     this.musicControl(!isPlay, this.data.currrentMusicId)
   },
 
   // 控制音乐的播放
   async musicControl(isPlay, musicId) {
-    const backgroundAudioManager = wx.getBackgroundAudioManager()
     if (isPlay) {
       // 获取阴郁的播放地址
       const musicPalayData = await request('song/url', {
@@ -68,16 +88,10 @@ Page({
       })
       const musicPlayLink = musicPalayData.data[0].url
       //  生成北京音频的实例
-      backgroundAudioManager.src = musicPlayLink
-      backgroundAudioManager.title = this.data.musicInfo.name
-
-      // 修改全局的播放状态
-      app.globalData.isMusicPlay = true
-      app.globalData.musicId = musicId
+      this.backgroundAudioManager.src = musicPlayLink
+      this.backgroundAudioManager.title = this.data.musicInfo.name
     } else {
-      backgroundAudioManager.pause()
-      app.globalData.isMusicPlay = false
-      app.globalData.musicId = musicId
+      this.backgroundAudioManager.pause()
     }
   }
 })
