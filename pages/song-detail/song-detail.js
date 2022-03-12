@@ -7,7 +7,8 @@ Page({
   data: {
     isPlay: false,
     musicInfo: {},
-    currrentMusicId: 0
+    currrentMusicId: 0,
+    musicLink: ""
   },
   onLoad: function (options) {
     // 接收路由参数 onLoad的自动的参数options：就携带着
@@ -88,19 +89,24 @@ Page({
       isPlay
     } = this.data
 
-    this.musicControl(!isPlay, this.data.currrentMusicId)
+    this.musicControl(!isPlay, this.data.currrentMusicId, this.data.musicLink)
   },
 
   // 控制音乐的播放
-  async musicControl(isPlay, musicId) {
+  async musicControl(isPlay, musicId, musicLink) {
     if (isPlay) {
-      // 获取阴郁的播放地址
-      const musicPalayData = await request('song/url', {
-        id: musicId
-      })
-      const musicPlayLink = musicPalayData.data[0].url
+      if (!musicLink) {
+        // 获取阴郁的播放地址
+        const musicPalayData = await request('song/url', {
+          id: musicId
+        })
+        musicLink = musicPalayData.data[0].url
+        this.setData({
+          musicLink
+        })
+      }
       //  生成北京音频的实例
-      this.backgroundAudioManager.src = musicPlayLink
+      this.backgroundAudioManager.src = musicLink
       this.backgroundAudioManager.title = this.data.musicInfo.name
     } else {
       this.backgroundAudioManager.pause()
