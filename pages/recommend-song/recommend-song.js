@@ -1,10 +1,12 @@
+import PubSub from 'pubsub-js'
 import request from '../../utils/request'
 
 Page({
   data: {
     day: 0,
     month: 0,
-    recommendList: []
+    recommendList: [],
+    currentMusicIndex: 0
   },
   onLoad: function (options) {
     this.setData({
@@ -13,6 +15,26 @@ Page({
     })
 
     this.getRecommendList()
+
+    // 订阅消息
+    PubSub.subscribe("switchType", (msg, type) => {
+      let {
+        recommendList,
+        currentMusicIndex
+      } = this.data
+      if (type === "pre") {
+        (currentMusicIndex === 0) && (currentMusicIndex = recommendList.length)
+        currentMusicIndex -= 1
+      } else {
+        (currentMusicIndex === recommendList.length - 1) && (currentMusicIndex = -1)
+        currentMusicIndex += 1
+      }
+      this.setData({
+        currentMusicIndex
+      })
+      let musicId = recommendList[currentMusicIndex].id
+      PubSub.publish("musicId", musicId)
+    })
   },
 
   async getRecommendList() {
@@ -25,6 +47,10 @@ Page({
 
   toSongDetail(event) {
     let songId = event.currentTarget.dataset.song.id.toString()
+    let index = event.currentTarget.dataset.index
+    this.setData({
+      currentMusicIndex: index
+    })
     wx.navigateTo({
       url: '/pages/song-detail/song-detail?id=' + songId,
     })

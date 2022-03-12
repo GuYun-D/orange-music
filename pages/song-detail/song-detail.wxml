@@ -9,9 +9,9 @@
 
   <view class="music-control">
     <text class="iconfont icon-iconsMusicyemianbofangmoshiShuffle"></text>
-    <text class="iconfont icon-shangyishou"></text>
+    <text bindtap="handleSwitchMusic" id="pre" class="iconfont icon-shangyishou"></text>
     <text class="iconfont {{isPlay ? 'icon-zanting' : 'icon-bofang'}} big" bindtap="handleMusicPlay"></text>
-    <text class="iconfont icon-next"></text>
+    <text bindtap="handleSwitchMusic" class="iconfont icon-next" id="next"></text>
     <text class="iconfont icon-iconsMusicyemianbofangmoshiPlayList"></text>
   </view>
 </view>

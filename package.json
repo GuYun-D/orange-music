@@ -1,0 +1,25 @@
+{
+  "name": "orange-music",
+  "version": "1.0.0",
+  "description": "原生微信小程序开发的音乐小程序",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuYun-D/orange-music.git"
+  },
+  "keywords": [
+    "网易云nodeapi，原生微信小程序"
+  ],
+  "author": "GuYun-D",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GuYun-D/orange-music/issues"
+  },
+  "homepage": "https://github.com/GuYun-D/orange-music#readme",
+  "dependencies": {
+    "pubsub-js": "^1.9.4"
+  }
+}

@@ -1,3 +1,4 @@
+import PubSub from "pubsub-js"
 import request from '../../utils/request'
 // 获取全局app实例
 const app = getApp()
@@ -58,6 +59,17 @@ Page({
       })
       app.globalData.isMusicPlay = false
     })
+
+    // 订阅
+    PubSub.subscribe("musicId", (msg, musicId) => {
+      this.getSongInfo(musicId)
+      this.setData({
+        isPlay: true
+      })
+      app.globalData.musicId = musicId
+      app.globalData.isMusicPlay = true
+      this.musicControl(true, musicId)
+    })
   },
   async getSongInfo(id) {
     const musicInfo = await request('song/detail', {
@@ -93,5 +105,12 @@ Page({
     } else {
       this.backgroundAudioManager.pause()
     }
+  },
+
+  // 切歌
+  handleSwitchMusic(event) {
+    const opId = event.currentTarget.id
+    // 发布消息
+    PubSub.publish("switchType", opId)
   }
 })
