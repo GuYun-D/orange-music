@@ -48,7 +48,8 @@
       "pages": [
         "pages/recommend-song/recommend-song",
         "pages/song-detail/song-detail"
-      ]
+      ],
+      "independent": true
     }
   ]
 }
