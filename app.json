@@ -1,9 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/recommend-song/recommend-song",
     "pages/video/video",
-    "pages/song-detail/song-detail",
     "pages/personal/personal",
     "pages/loign/login"
   ],
@@ -43,5 +41,14 @@
         "selectedIconPath": "/static/tab/tab-my-current.png"
       }
     ]
-  }
+  },
+  "subPackages": [
+    {
+      "root": "songPackage",
+      "pages": [
+        "pages/recommend-song/recommend-song",
+        "pages/song-detail/song-detail"
+      ]
+    }
+  ]
 }

@@ -1,5 +1,5 @@
 import PubSub from 'pubsub-js'
-import request from '../../utils/request'
+import request from '../../../utils/request'
 
 Page({
   data: {
@@ -52,7 +52,7 @@ Page({
       currentMusicIndex: index
     })
     wx.navigateTo({
-      url: '/pages/song-detail/song-detail?id=' + songId,
+      url: '/songPackage/pages/song-detail/song-detail?id=' + songId,
     })
   }
 })

@@ -49,7 +49,7 @@ Page({
 
   toRecommendSong(){
     wx.navigateTo({
-      url: '/pages/recommend-song/recommend-song',
+      url: '/songPackage/pages/recommend-song/recommend-song',
     })
   }
 })
