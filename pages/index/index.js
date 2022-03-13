@@ -45,5 +45,11 @@ Page({
         topList: resultTopArr
       })
     }
+  },
+
+  toRecommendSong(){
+    wx.navigateTo({
+      url: '/pages/recommend-song/recommend-song',
+    })
   }
 })
