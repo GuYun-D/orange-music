@@ -45,11 +45,20 @@
   "subPackages": [
     {
       "root": "songPackage",
+      "name": "song",
       "pages": [
         "pages/recommend-song/recommend-song",
         "pages/song-detail/song-detail"
       ],
       "independent": true
     }
-  ]
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "packages": [
+        "songPackage"
+      ],
+      "network": "all"
+    }
+  }
 }
